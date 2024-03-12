@@ -21,10 +21,11 @@ class PizzaOrder {
          isAccepted = true;
          String order = "Заказ принят. ";
          switch (size) {
-            case SMALL -> order += "Маленькая пица ";
+            case SMALL -> order += "Маленькая пицца ";
             case MEDIUM -> order += "Средняя пицца ";
             case BIG -> order += "Большая пицца ";
          }
+         order += "\"" + name + "\" ";
          if (withSauce) {
             order += "с соусом ";
          } else {
@@ -36,11 +37,7 @@ class PizzaOrder {
    }
 
    void cancel () {
-      if (isAccepted) {
-         System.out.println("Заказ отменен");
-      } else {
-         System.out.println("Заказ не был принят");
-      }
+      System.out.println("Заказ отменен");
    }
 
    void setName (String name) {
@@ -83,7 +80,7 @@ class PizzaOrder {
          case MEDIUM -> order += "Средняя";
          case BIG -> order += "Большая";
       }
-      order += ", адрес доставки:" + deliveryAddress;
+      order += ", адрес доставки: " + deliveryAddress;
       return order;
    }
 }

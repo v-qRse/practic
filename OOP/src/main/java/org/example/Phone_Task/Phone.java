@@ -34,12 +34,13 @@ class Phone {
    void sendMessage () {
       String[] notebook = {"+79005004031", "+79006005042", "+79009001033", "+79008634034", "+79004324035"};
       for (String number: notebook) {
-         System.out.println(number);
+         System.out.print(number + " ");
       }
+      System.out.println();
    }
 
    @Override
    public String toString() {
-      return "Номер : " + number + "модель: " + model + "вес: " + weight;
+      return "Номер : " + number + " модель: " + model + " вес: " + weight;
    }
 }

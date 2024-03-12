@@ -9,12 +9,12 @@ class Book {
       this.year = year;
    }
 
-   void setName (String name) {
-      author.setName(name);
-   }
-
    void setAuthor (Author author) {
       this.author = new Author(author.getName(), author.getGender(), author.getEmail());
+   }
+
+   void setYear (String year) {
+      this.year = year;
    }
 
    String getYear () {
