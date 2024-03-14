@@ -1,9 +1,13 @@
 package org.example.Paint_Task;
 
-abstract class Figure {
-   Point point;
+abstract class Figure  implements Drawable {
+   Point point = new Point();
 
-   void area () {};
+   double area () {
+      return 0;
+   }
 
-   void perimeter () {};
+   double perimeter () {
+      return 0;
+   }
 }

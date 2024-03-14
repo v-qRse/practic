@@ -4,20 +4,18 @@ class FigureUntil {
    private FigureUntil () { }
 
    static double area (Figure figure) {
-
-      return 1;
+      return figure.area();
    }
 
    static double perimeter (Figure figure) {
-
-      return 1;
+      return figure.perimeter();
    }
 
    static void draw (Figure figure) {
-
+      figure.draw();
    }
 
    static void draw (Figure figure, Color color) {
-
+      figure.draw(color);
    }
 }
