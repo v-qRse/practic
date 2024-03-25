@@ -7,7 +7,7 @@ public class Goal {
       statement = null;
    }
 
-   Goal (String statement) {
+   public Goal (String statement) {
       this.statement = statement;
    }
 

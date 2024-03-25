@@ -54,4 +54,14 @@ public class GoalScrollTest {
          assertEquals(e.getMessage(), "The Goal is full");
       }
    }
+
+
+   @Test
+   void privateMethodAndToStringTest () throws Exception {
+      GoalScroll goalScroll = new GoalScroll();
+
+      String stringGoalScroll = goalScroll.toString();
+      assertEquals(String.format( "Максимальная длина: %s Текущее количество целей: %s. Цели: %s",
+                  3, 0, ""), stringGoalScroll);
+   }
 }

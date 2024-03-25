@@ -15,7 +15,7 @@ public class GoalScroll {
          goalScroll[currentNumberGoal] = newGoal;
          currentNumberGoal++;
       } catch (Exception e) {
-         throw new Exception("The Goal is full");
+         throw new Exception("Goal scroll is full");
       }
    }
 
@@ -27,4 +27,20 @@ public class GoalScroll {
       }
    }
 
+   @Override
+   public String toString() {
+      return "Максимальная длина: " + MAX_GOAL +
+            " Текущее количество целей: " + currentNumberGoal +
+            ". Цели: " + goalScrollToString();
+   }
+
+   private String goalScrollToString() {
+      StringBuilder out = new StringBuilder();
+      for (Goal goal: goalScroll) {
+         if (goal != null) {
+            out.append(goal.getStatement()).append("; ");
+         }
+      }
+      return out.toString();
+   }
 }
