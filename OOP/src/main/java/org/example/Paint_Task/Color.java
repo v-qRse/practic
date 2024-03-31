@@ -1,6 +1,6 @@
 package org.example.Paint_Task;
 
-enum Color {
+public enum Color {
    BLACK,
    YELLOW,
    RED,

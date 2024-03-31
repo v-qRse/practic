@@ -1,6 +1,11 @@
 package org.example.Phone_Task;
 
-class Phone {
+public class Phone {
+   public static final String MY_PHONE_NUMBER = "+79005004031";
+   public static final String WORK_PHONE_NUMBER = "+79006005042";
+   public static final String BEST_PHONE_NUMBER = "+79005004321";
+   public static final String RANDOM_PHONE_NUMBER = "+79008634034";
+
    private String number;
    private String model;
    private String weight;
@@ -18,7 +23,7 @@ class Phone {
       this.weight = weight;
    }
 
-   String getNumber () {
+   public String getNumber () {
       return number;
    }
 
@@ -32,7 +37,7 @@ class Phone {
    }
 
    void sendMessage () {
-      String[] notebook = {"+79005004031", "+79006005042", "+79009001033", "+79008634034", "+79004324035"};
+      String[] notebook = {MY_PHONE_NUMBER, WORK_PHONE_NUMBER, BEST_PHONE_NUMBER, RANDOM_PHONE_NUMBER};
       for (String number: notebook) {
          System.out.print(number + " ");
       }

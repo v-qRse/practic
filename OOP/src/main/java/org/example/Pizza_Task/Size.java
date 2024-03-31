@@ -1,7 +1,14 @@
 package org.example.Pizza_Task;
 
-enum Size {
-   SMALL,
-   MEDIUM,
-   BIG;
+public enum Size {
+   SMALL("Маленькая "),
+   MEDIUM("Средняя "),
+   BIG("Большая ");
+   private String description;
+   private Size(String description) {
+      this.description = description + "пицца ";
+   }
+   public String getDescription() {
+      return description;
+   }
 }

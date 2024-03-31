@@ -32,14 +32,16 @@ public class CircleTest {
    @Test
    public void toStringEquals () {
       Circle circle = new Circle(1, "Black");
-      assertEquals("Радиус: 1.0; цвет: Black; площадь: " + Math.PI +
-            "; периметр: " + 2*Math.PI, circle.toString());
+      assertEquals(String.format("Радиус: %s; цвет: %s; площадь: %s; периметр: %s",
+                  1.0, "Black", Math.PI, 2*Math.PI),
+                  circle.toString());
 
       circle = new Circle(0, "Yellow");
-      assertEquals("Радиус: 0.0; цвет: Yellow; площадь: 0.0; периметр: 0.0", circle.toString());
+      assertEquals(String.format("Радиус: %s; цвет: %s; площадь: %s; периметр: %s",
+            0.0, "Yellow", 0.0, 0.0), circle.toString());
 
       circle = new Circle(10, null);
-      assertEquals("Радиус: 10.0; цвет: null; площадь: " + Math.PI*10*10 +
-            "; периметр: " + 2*Math.PI*10, circle.toString());
+      assertEquals(String.format("Радиус: %s; цвет: %s; площадь: %s; периметр: %s",
+            10.0, null, Math.PI*10*10, 2*Math.PI*10), circle.toString());
    }
 }

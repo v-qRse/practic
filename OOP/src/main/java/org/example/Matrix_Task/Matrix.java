@@ -1,24 +1,29 @@
 package org.example.Matrix_Task;
 
-class Matrix {
-   static final int ROW = 5;
-   static final int COLUMN = 5;
-   double[][] matrix = new double[ROW][COLUMN];
+public class Matrix {
+   private static final int ROW = 5;
+   private static final int COLUMN = 5;
+   private double[][] matrix = new double[ROW][COLUMN];
 
-   void setValue (int i, int j, double value) {
+   public void setValue (int i, int j, double value) {
       matrix[i][j] = value;
    }
 
-   void print () {
-      for (double[] valueRow: matrix) {
-         for (double value: valueRow) {
-            System.out.printf("%10s", value);
+   public String[] getForPrint () {
+      String[] out = new String[ROW];
+
+      for (int rowIndex = 0; rowIndex < ROW; rowIndex++) {
+         StringBuilder buffer = new StringBuilder();
+         for (int columnIndex = 0; columnIndex < COLUMN; columnIndex++) {
+            buffer.append(" ").append(matrix[rowIndex][columnIndex]);
          }
-         System.out.println();
+         out[rowIndex] = buffer.toString();
       }
+
+      return out;
    }
 
-   void additionMatrix (Matrix matrix) {
+   public void additionMatrix (Matrix matrix) {
       for (int row = 0; row < ROW; row++) {
          for (int column = 0; column < COLUMN; column++) {
             setValue(row, column, this.matrix[row][column] + matrix.matrix[row][column]);
@@ -26,7 +31,7 @@ class Matrix {
       }
    }
 
-   void multiplyNumber (double number) {
+   public void multiplyNumber (double number) {
       for (int row = 0; row < ROW; row++) {
          for (int column = 0; column < COLUMN; column++) {
             setValue(row, column, this.matrix[row][column] * number);
@@ -34,7 +39,7 @@ class Matrix {
       }
    }
 
-   static Matrix multiplyMatrix (Matrix matrix1, Matrix matrix2) {
+   public static Matrix multiplyMatrix (Matrix matrix1, Matrix matrix2) {
       Matrix resultMatrix = new Matrix();
       for (int row = 0; row < ROW; row++) {
          for (int column = 0; column < COLUMN; column++) {

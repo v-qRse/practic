@@ -1,9 +1,9 @@
 package org.example.Paint_Task;
 
-class FigureUntil {
+public class FigureUntil {
    private FigureUntil () { }
 
-   static double area (Figure figure) {
+   public static double area (Figure figure) {
       return figure.area();
    }
 
@@ -11,11 +11,11 @@ class FigureUntil {
       return figure.perimeter();
    }
 
-   static void draw (Figure figure) {
+   public static void draw (Figure figure) {
       figure.draw();
    }
 
-   static void draw (Figure figure, Color color) {
+   public static void draw (Figure figure, Color color) {
       figure.draw(color);
    }
 }

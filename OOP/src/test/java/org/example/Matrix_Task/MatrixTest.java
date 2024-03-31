@@ -3,6 +3,8 @@ package org.example.Matrix_Task;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 public class MatrixTest {
    private Matrix matrix1;
    private Matrix matrix2;
@@ -25,7 +27,7 @@ public class MatrixTest {
    };
 
    @BeforeEach
-   public void CreateMatrix () {
+   public void createMatrix () {
       matrix1 = new Matrix();
       for (int row = 0; row < exampleMatrix1.length; row++) {
          for (int column = 0; column < exampleMatrix1[row].length; column++) {
@@ -43,36 +45,55 @@ public class MatrixTest {
 
    @Test
    public void printTest () {
-      matrix1.print();
-      System.out.println();
-      matrix2.print();
+      String[] out = matrix1.getForPrint();
+      for (int index = 0; index < out.length; index++) {
+         assertEquals(String.format(" %s %s %s %s %s",
+               exampleMatrix1[index][0], exampleMatrix1[index][1], exampleMatrix1[index][2],
+               exampleMatrix1[index][3], exampleMatrix1[index][4]),
+               out[index]);
+      }
+      out = matrix2.getForPrint();
+      for (int index = 0; index < out.length; index++) {
+         assertEquals(String.format(" %s %s %s %s %s",
+                     exampleMatrix2[index][0], exampleMatrix2[index][1], exampleMatrix2[index][2],
+                     exampleMatrix2[index][3], exampleMatrix2[index][4]),
+               out[index]);
+      }
    }
 
    @Test
    public void multiplyNumberEquals () {
-      matrix1.print();
-      System.out.println("* 0 =");
       matrix1.multiplyNumber(0);
-      matrix1.print();
+      String[] out = matrix1.getForPrint();
+      for (int index = 0; index < out.length; index++) {
+         assertEquals(String.format(" %s %s %s %s %s", 0.0, 0.0, 0.0, 0.0, 0.0), out[index]);
+      }
    }
 
    @Test
    public void matrixAdditionTest () {
-      matrix1.print();
-      System.out.println("+");
-      matrix2.print();
-      System.out.println("=");
       matrix1.additionMatrix(matrix2);
-      matrix1.print();
+      String[] out = matrix1.getForPrint();
+      for (int index = 0; index < out.length; index++) {
+         assertEquals(String.format(" %s %s %s %s %s",
+                     exampleMatrix1[index][0] + exampleMatrix2[index][0],
+                     exampleMatrix1[index][1] + exampleMatrix2[index][1],
+                     exampleMatrix1[index][2] + exampleMatrix2[index][2],
+                     exampleMatrix1[index][3] + exampleMatrix2[index][3],
+                     exampleMatrix1[index][4] + exampleMatrix2[index][4]),
+               out[index]);
+      }
    }
 
    @Test
    public void matrixMultiplication () {
-      matrix1.print();
-      System.out.println("*");
-      matrix2.print();
-      System.out.println("=");
       matrix3 = Matrix.multiplyMatrix(matrix1, matrix2);
-      matrix3.print();
+      String[] out = matrix3.getForPrint();
+      for (int index = 0; index < out.length; index++) {
+         assertEquals(String.format(" %s %s %s %s %s",
+                     exampleMatrix1[index][0], exampleMatrix1[index][1], exampleMatrix1[index][2],
+                     exampleMatrix1[index][3], exampleMatrix1[index][4]),
+               out[index]);
+      }
    }
 }

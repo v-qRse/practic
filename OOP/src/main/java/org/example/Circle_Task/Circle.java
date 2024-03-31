@@ -1,6 +1,6 @@
 package org.example.Circle_Task;
 
-class Circle {
+public class Circle {
    private double radius;
    private String color;
 
@@ -9,11 +9,11 @@ class Circle {
       this.color = color;
    }
 
-   double area () {
+   public double area () {
       return Math.PI*radius*radius;
    }
 
-   double perimeter () {
+   public double perimeter () {
       return 2*Math.PI*radius;
    }
 

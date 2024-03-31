@@ -65,12 +65,12 @@ public class PizzaOrderTest {
    @Test
    public void toStringEquals () {
       PizzaOrder order = new PizzaOrder("name", Size.BIG, false, "delivery address");
-      assertEquals("Название: name, размер: Большая, адрес доставки: delivery address", order.toString());
+      assertEquals("Название: name, размер: Большая пицца , адрес доставки: delivery address", order.toString());
 
       order.setSize(Size.MEDIUM);
-      assertEquals("Название: name, размер: Средняя, адрес доставки: delivery address", order.toString());
+      assertEquals("Название: name, размер: Средняя пицца , адрес доставки: delivery address", order.toString());
 
       order.setSize(Size.SMALL);
-      assertEquals("Название: name, размер: Маленькая, адрес доставки: delivery address", order.toString());
+      assertEquals("Название: name, размер: Маленькая пицца , адрес доставки: delivery address", order.toString());
    }
 }

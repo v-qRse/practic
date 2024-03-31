@@ -9,19 +9,19 @@ class Book {
       this.year = year;
    }
 
-   void setAuthor (Author author) {
+   public void setAuthor (Author author) {
       this.author = new Author(author.getName(), author.getGender(), author.getEmail());
    }
 
-   void setYear (String year) {
+   public void setYear (String year) {
       this.year = year;
    }
 
-   String getYear () {
+   public String getYear () {
       return year;
    }
 
-   Author getAuthor () {
+   public Author getAuthor () {
       return author;
    }
 

@@ -1,6 +1,6 @@
 package org.example.Paint_Task;
 
-class Circle extends Figure implements Drawable {
+public class Circle extends Figure implements Drawable {
 
    @Override
    public void draw() {

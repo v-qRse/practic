@@ -1,6 +1,6 @@
 package org.example.Pizza_Task;
 
-class PizzaOrder {
+public class PizzaOrder {
    private String name;
    private Size size;
    private boolean withSauce;
@@ -14,18 +14,14 @@ class PizzaOrder {
       this.deliveryAddress = deliveryAddress;
    }
 
-   void order () {
+   public void order () {
       if (isAccepted) {
          System.out.println("Заказ уже принят");
       } else {
          isAccepted = true;
-         String order = "Заказ принят. ";
-         switch (size) {
-            case SMALL -> order += "Маленькая пицца ";
-            case MEDIUM -> order += "Средняя пицца ";
-            case BIG -> order += "Большая пицца ";
-         }
-         order += "\"" + name + "\" ";
+         String order = "Заказ принят. " + size.getDescription() +
+               "\"" + name + "\" ";
+
          if (withSauce) {
             order += "с соусом ";
          } else {
@@ -36,51 +32,45 @@ class PizzaOrder {
       }
    }
 
-   void cancel () {
+   public void cancel () {
       System.out.println("Заказ отменен");
    }
 
-   void setName (String name) {
+   public void setName (String name) {
       this.name = name;
    }
 
-   void setSize (Size size) {
+   public void setSize (Size size) {
       this.size = size;
    }
 
-   void setWithSauce (boolean withSauce) {
+   public void setWithSauce (boolean withSauce) {
       this.withSauce = withSauce;
    }
 
-   void setDeliveryAddress (String deliveryAddress) {
+   public void setDeliveryAddress (String deliveryAddress) {
       this.deliveryAddress = deliveryAddress;
    }
 
-   String getName () {
+   public String getName () {
       return name;
    }
 
-   Size getSize () {
+   public Size getSize () {
       return size;
    }
 
-   boolean isWithSauce() {
+   public boolean isWithSauce() {
       return withSauce;
    }
 
-   String getDeliveryAddress () {
+   public String getDeliveryAddress () {
       return deliveryAddress;
    }
 
    @Override
    public String toString () {
-      String order = "Название: " + name + ", размер: ";
-      switch (size) {
-         case SMALL -> order += "Маленькая";
-         case MEDIUM -> order += "Средняя";
-         case BIG -> order += "Большая";
-      }
-      order += ", адрес доставки: " + deliveryAddress;
-      return order;
+      return "Название: " + name + ", размер: " + size.getDescription() +
+            ", адрес доставки: " + deliveryAddress;
    }
 }

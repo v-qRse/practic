@@ -1,13 +1,13 @@
 package org.example.Paint_Task;
 
 abstract class Figure  implements Drawable {
-   Point point = new Point();
+   protected Point point = new Point();
 
-   double area () {
+   public double area () {
       return 0;
    }
 
-   double perimeter () {
+   public double perimeter () {
       return 0;
    }
 }

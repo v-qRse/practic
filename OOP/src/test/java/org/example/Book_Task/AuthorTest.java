@@ -20,8 +20,7 @@ public class AuthorTest {
 
    @Test
    public void getNameEqualsSet () {
-      Author author = new Author(null, null, null);
-      author.setName("name");
+      Author author = new Author("name", null, null);
       String name = author.getName();
 
       assertEquals("name", name);
@@ -29,8 +28,7 @@ public class AuthorTest {
 
    @Test
    public void getGenderEqualsSet () {
-      Author author = new Author(null, null, null);
-      author.setGender("gender");
+      Author author = new Author(null, "gender", null);
       String gender = author.getGender();
 
       assertEquals("gender", gender);
@@ -38,8 +36,7 @@ public class AuthorTest {
 
    @Test
    public void getEmailEqualsSet () {
-      Author author = new Author(null, null, null);
-      author.setEmail("email");
+      Author author = new Author(null, null, "email");
       String email = author.getEmail();
 
       assertEquals("email", email);
