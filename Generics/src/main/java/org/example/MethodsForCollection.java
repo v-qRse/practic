@@ -1,11 +1,12 @@
 package org.example;
 
-import java.util.Collection;
+import java.security.cert.CollectionCertStoreParameters;
+import java.util.*;
 
-public class MetodsForCollection {
+public class MethodsForCollection {
 
    public static <N extends Number> int oddNumbersCount (Collection<N> collection) throws Exception {
-      if (!collection.isEmpty()) {
+      try {
          int counter = 0;
          for (N number : collection) {
             if (number.doubleValue() % 2 == 1) {
@@ -13,7 +14,7 @@ public class MetodsForCollection {
             }
          }
          return counter;
-      } else {
+      } catch (Exception e) {
          throw new Exception("Коллекция пустая");
       }
    }
@@ -21,8 +22,19 @@ public class MetodsForCollection {
    public static void swapElementsCollection (Collection<?> collection, int firstIndex, int secondIndex)
          throws Exception
    {
-      if (!collection.isEmpty()) {
-         int firstIndexCount = 0;
+      if (collection != null && !collection.isEmpty()) {
+         if (firstIndex > collection.size() || secondIndex > collection.size()) {
+            throw new Exception("Индекс находится вне границ коллекции");
+         } else {
+            Collections.swap((List<?>) collection, firstIndex, secondIndex);
+         }
+//         Object buffer1 = collection.toArray()[firstIndex];
+//         Object buffer2 = collection.toArray()[secondIndex];
+//
+//         collection.toArray()[firstIndex] = buffer2;
+//         collection.toArray()[secondIndex] = buffer1;
+
+         /*int firstIndexCount = 0;
          for (Object firstElement : collection) {
             if (firstIndexCount == firstIndex) {
                int secondIndexCount = 0;
@@ -31,7 +43,7 @@ public class MetodsForCollection {
                      Object buffer = firstElement;
                      firstElement = secondElement;
                      secondElement = buffer;
-                     break;
+                     return;
                   }
                   secondIndexCount++;
                }
@@ -44,7 +56,7 @@ public class MetodsForCollection {
          }
          if (firstIndexCount > firstIndex) {
             throw new Exception("Индекс находится вне границ коллекции");
-         }
+         }*/
       } else {
          throw new Exception("Попытка поменять элементы в пустой коллекции");
       }
