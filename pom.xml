@@ -10,6 +10,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>Base</module>
+        <module>Lambdas</module>
     </modules>
 
     <properties>
