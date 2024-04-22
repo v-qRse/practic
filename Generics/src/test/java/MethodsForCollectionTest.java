@@ -1,5 +1,5 @@
 import org.example.MethodsForCollection;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.*;
@@ -9,11 +9,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class MethodsForCollectionTest {
 
    final private Number[] elementArray = new Integer[] {0, 1, 2, 3, 4, 5, 6};
-//   private Collection<Number> collection;
-//   @BeforeEach
-//   public void createCollection () {
-//      collection = new ArrayList<>(Arrays.asList(elementArray));
-//   }
 
    @Test
    public void oddNumbersCountTest () throws Exception {
@@ -24,7 +19,7 @@ public class MethodsForCollectionTest {
    }
 
    @Test
-   public void oddNumbersCountExceptionTest () throws Exception {
+   public void oddNumbersCountExceptionTest () {
       try {
          int number = MethodsForCollection.oddNumbersCount(null);
       } catch (Exception e) {
@@ -56,26 +51,25 @@ public class MethodsForCollectionTest {
       collection = new ArrayList<>(Arrays.asList(elementArray));
 
       MethodsForCollection.swapElementsCollection(collection, 3, 3);
-
+      int index = 0;
       for (Number elementCollection: collection) {
-         assertEquals(elementArray[arrayIndex], elementCollection);
+         assertEquals(elementArray[index], elementCollection);
+         index++;
       }
    }
 
    @Test
-   public void swapElementsCollectionExceptionTest () throws Exception {
-      try {
+   public void swapElementsCollectionExceptionTest () {
+      Exception getMessageException = Assertions.assertThrows(Exception.class, () -> {
          MethodsForCollection.swapElementsCollection(null, 3, 3);
-      } catch (Exception e) {
-         assertEquals("Попытка поменять элементы в пустой коллекции", e.getMessage());
-      }
+      });
+      assertEquals("Попытка поменять элементы в пустой коллекции", getMessageException.getMessage());
 
-      Collection<Number> collection = new ArrayList<>();
-      collection.add(0);
-      try {
+      Exception swapElementsCollectionException = Assertions.assertThrows(Exception.class, () -> {
+         Collection<Number> collection = new ArrayList<>();
+         collection.add(0);
          MethodsForCollection.swapElementsCollection(collection, 3, 3);
-      } catch (Exception e) {
-         assertEquals("Индекс находится вне границ коллекции", e.getMessage());
-      }
+      });
+      assertEquals("Индекс находится вне границ коллекции", swapElementsCollectionException.getMessage());
    }
 }
