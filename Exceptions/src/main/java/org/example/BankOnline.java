@@ -32,6 +32,5 @@ public class BankOnline {
       } else if (money < 0) {
          throw new OutOfLimitTransferException("Отрицательная сумма перевода недопустима");
       }
-      // Реализация метода
    }
 }
