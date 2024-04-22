@@ -1,5 +1,6 @@
 import org.example.Goal;
 import org.example.GoalScroll;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -38,21 +39,16 @@ public class GoalScrollTest {
    public void exceptionTest () {
       GoalScroll goalScroll = new GoalScroll();
 
-      try {
-         goalScroll.getLastGoalScroll();
-      } catch (Exception e) {
-         System.out.println(e.getMessage());
-         assertEquals(e.getMessage(), "Goal scroll is clear");
-      }
+      Exception getLastGoalScrollException = Assertions.assertThrows(Exception.class, goalScroll::getLastGoalScroll);
+      assertEquals(getLastGoalScrollException.getMessage(), "Goal scroll is clear");
 
-      try {
+
+      Exception addGoalException = Assertions.assertThrows(Exception.class, () -> {
          while (true) {
             goalScroll.addGoal(new Goal());
          }
-      } catch (Exception e) {
-         System.out.println(e.getMessage());
-         assertEquals(e.getMessage(), "The Goal is full");
-      }
+      });
+      assertEquals(addGoalException.getMessage(), "Goal scroll is full");
    }
 
 
