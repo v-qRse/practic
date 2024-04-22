@@ -8,8 +8,8 @@ import org.example.animals.Zebra;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SoundingTest {
-   public void list () {
+public class Solve {
+   public static void main(String[] args) {
       List<Sounding> soundingList = new ArrayList<>();
       soundingList.add(new Cat());
       soundingList.add(new Chinchilla());
@@ -22,6 +22,7 @@ public class SoundingTest {
       for (Sounding animalsSounding: soundingList) {
          System.out.println(animalsSounding.sound());
       }
+      System.out.println();
 
       soundingList.add(new Sounding() {
          @Override
@@ -29,19 +30,19 @@ public class SoundingTest {
             return "sing";
          }
       });
-
       for (Sounding animalsSounding: soundingList) {
          System.out.println(animalsSounding.sound());
       }
+      System.out.println();
 
       soundingList.add(() -> "gobble");
       for (Sounding animalsSounding: soundingList) {
          System.out.println(animalsSounding.sound());
       }
+      System.out.println();
 
       Sounding cat = new Cat();
       soundingList.add(cat::sound);
-
       soundingList.forEach(System.out::println);
    }
 }
