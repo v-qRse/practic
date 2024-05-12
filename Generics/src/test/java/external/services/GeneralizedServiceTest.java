@@ -10,10 +10,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class GeneralizedServiceTest {
    @Test
    public void nameServiceTest () throws Exception {
-      GeneralizedService service = new GeneralizedService();
+      GeneralizedService<NameService> service = new GeneralizedService(){};
       Object nameServiceResult = service.sequenceInteractionForService(new NameService<>(), "request");
       assertEquals("equest", nameServiceResult);
+   }
 
+   @Test
+   public void phoneNumberTest () throws Exception {
+      GeneralizedService<PhoneNumberService> service = new GeneralizedService(){};
       Object phoneNumberServiceResult = service.sequenceInteractionForService(new PhoneNumberService<>(), "01234567890");
       assertEquals(45, phoneNumberServiceResult);
    }
