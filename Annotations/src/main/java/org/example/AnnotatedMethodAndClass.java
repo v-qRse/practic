@@ -15,8 +15,8 @@ public class AnnotatedMethodAndClass  extends AnnotatedClass {
             firstDataContainer.getName() + " " + secondDataContainer.getName());
    }
 
-   @TimePriority(hour = 0,
-         priority = 0,
+   @TimePriority(hour = 2,
+         priority = 2,
          description = "value = 0, name = \"\"")
    public static boolean isEmptyDataContainer(@NonNull DataContainer dataContainer) {
       return dataContainer.getValue() == 0
