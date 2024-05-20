@@ -10,6 +10,8 @@
     <packaging>pom</packaging>
     <modules>
         <module>base</module>
+        <module>OOP</module>
+        <module>unitTest</module>
         <module>exceptions</module>
     </modules>
 
