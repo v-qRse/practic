@@ -13,6 +13,7 @@
         <module>OOP</module>
         <module>unitTest</module>
         <module>exceptions</module>
+        <module>lambdas</module>
     </modules>
 
     <properties>
