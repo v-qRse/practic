@@ -15,6 +15,7 @@
         <module>exceptions</module>
         <module>lambdas</module>
         <module>streams</module>
+        <module>Multithreading</module>
     </modules>
 
     <properties>
