@@ -6,53 +6,80 @@ import org.example.TimePriorities;
 import org.example.TimePriority;
 
 import java.lang.annotation.Annotation;
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.List;
+import java.util.PriorityQueue;
+import java.util.Queue;
 
 public class Reflection {
-   public static void annotatedClassCreated (int day, int value, String name) throws InvocationTargetException, IllegalAccessException {
-      DataContainer dataContainer = new DataContainer(value, name);
-      DataContainer bufContainer = new DataContainer(value, name);
-
-      Method[] methods = AnnotatedMethodAndClass.class.getMethods();
-      List<Method> list = Arrays.stream(methods)
-            .filter(x -> x.isAnnotationPresent(TimePriority.class))
-//            .sorted((x, y) -> Math.min(x.getAnnotation(TimePriority.class).priority(),
-//                                       y.getAnnotation(TimePriority.class).priority()))
-            .toList();
-
-      for (Method method: list) {
-         System.out.println("aaa");
-         dataContainer = (DataContainer) method.invoke(dataContainer, dataContainer);
+   public static void annotatedClassCreated (int day, int value, String name) {
+      DataContainer dataContainer;
+      try {
+         dataContainer = DataContainer.class.getConstructor(int.class, String.class).newInstance(value, name);
+      } catch (Exception e) {
+         throw new Error(e.getMessage());
       }
 
-//      AnnotatedMethodAndClass.class.getMethods()[0].getAnnotations();
+      Queue<Method> methodQueue = new PriorityQueue<>((x, y) -> {
+         int priorityX = x.getAnnotation(TimePriority.class).priority();
+         int priorityY = y.getAnnotation(TimePriority.class).priority();
+         return Integer.compare(priorityX, priorityY);
+      });
+
+      try {
+         Method[] classMethod = AnnotatedMethodAndClass.class.getMethods();
+         for (Method method: classMethod) {
+            Annotation[] annotations = method.getAnnotations();
+            for (Annotation annotation: annotations) {
+               System.out.println(annotation);
+               if (annotation instanceof TimePriorities) {
+                  methodQueue.add(method);
+               }
+            }
+         }
+
+         System.out.println(methodQueue.isEmpty());
+         for (Method method: methodQueue) {
+            System.out.println(method.getName());
+            method.invoke(dataContainer, dataContainer);
+         }
+
+         ///////////////////////////////
+
+//         methodQueue.add(AnnotatedMethodAndClass.class
+//               .getDeclaredMethod("dataContainerMerge", DataContainer.class, DataContainer.class));
 //
-//      Method[] allMethods = AnnotatedMethodAndClass.class.getMethods();
-//      for (Method method: allMethods) {
-//         for (Annotation annotation: method.getAnnotations()) {
-//            if (annotation instanceof TimePriority) {
-//               ((TimePriority) annotation).priority();
-//            }
-//         }
-//      }
+//         methodQueue.add(AnnotatedMethodAndClass.class
+//               .getDeclaredMethod("isEmptyDataContainer", DataContainer.class));
+//
+//         System.out.println(methodQueue.isEmpty());
 
-//      Object[] methods = Arrays.stream(AnnotatedMethodAndClass.class.getMethods())
-//            .sorted((x, y) -> Math.min(x.getAnnotation(TimePriorities.class).value()[0].priority(),
-//                                       y.getAnnotation(TimePriorities.class).value()[0].priority()))
-//            .toArray();
+      } catch (Exception e) {
+         throw new Error(e.getMessage());
+      }
 
-//      for (Object method: methods) {
-//         if (method instanceof Method) {
-//            dataContainer = (DataContainer) ((Method) method).invoke(dataContainer, dataContainer);
-//         }
-//      }
 
-      System.out.println(bufContainer.getName());
-      System.out.println(dataContainer.getName());
-      System.out.println(bufContainer.getValue());
-      System.out.println(dataContainer.getValue());
+      try {
+         Field valueField = dataContainer.getClass().getDeclaredField("value");
+         valueField.setAccessible(true);
+         int classValue = (int) valueField.get(dataContainer);
+         System.out.println(value);
+         System.out.println(classValue);
+      } catch (Exception e) {
+         throw new Error(e.getMessage());
+      }
+
+      try {
+         Field nameField = dataContainer.getClass().getDeclaredField("name");
+         nameField.setAccessible(true);
+         String className = (String) nameField.get(dataContainer);
+         System.out.println(name);
+         System.out.println(className);
+      } catch (Exception e) {
+         throw new Error(e.getMessage());
+      }
    }
 }
