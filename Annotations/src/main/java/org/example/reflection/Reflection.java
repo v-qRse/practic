@@ -5,12 +5,8 @@ import org.example.DataContainer;
 import org.example.TimePriorities;
 import org.example.TimePriority;
 
-import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.Arrays;
-import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
@@ -24,38 +20,46 @@ public class Reflection {
       }
 
       Queue<Method> methodQueue = new PriorityQueue<>((x, y) -> {
-         int priorityX = x.getAnnotation(TimePriority.class).priority();
-         int priorityY = y.getAnnotation(TimePriority.class).priority();
+         int priorityX = 0;
+         if (x.isAnnotationPresent(TimePriority.class)) {
+            priorityX = x.getAnnotation(TimePriority.class).priority();
+         } else if (x.isAnnotationPresent(TimePriorities.class)) {
+            TimePriority[] timePriorities = x.getAnnotation(TimePriorities.class).value();
+            int min = timePriorities[0].priority();
+            for (int timePriorityNumber = 1; timePriorityNumber < timePriorities.length; timePriorityNumber++) {
+               min = Math.min(min, timePriorities[timePriorityNumber].priority());
+            }
+            priorityX = min;
+         }
+         int priorityY = 0;
+         if (y.isAnnotationPresent(TimePriority.class)) {
+            priorityY = y.getAnnotation(TimePriority.class).priority();
+         } else if (y.isAnnotationPresent(TimePriorities.class)) {
+            TimePriority[] timePriorities = y.getAnnotation(TimePriorities.class).value();
+            int min = timePriorities[0].priority();
+            for (int timePriorityNumber = 1; timePriorityNumber < timePriorities.length; timePriorityNumber++) {
+               min = Math.min(min, timePriorities[timePriorityNumber].priority());
+            }
+            priorityY = min;
+         }
          return Integer.compare(priorityX, priorityY);
       });
 
       try {
          Method[] classMethod = AnnotatedMethodAndClass.class.getMethods();
          for (Method method: classMethod) {
-            Annotation[] annotations = method.getAnnotations();
-            for (Annotation annotation: annotations) {
-               System.out.println(annotation);
-               if (annotation instanceof TimePriorities) {
-                  methodQueue.add(method);
-               }
+            if (method.isAnnotationPresent(TimePriority.class) || method.isAnnotationPresent(TimePriorities.class)) {
+               methodQueue.add(method);
             }
          }
 
-         System.out.println(methodQueue.isEmpty());
          for (Method method: methodQueue) {
-            System.out.println(method.getName());
-            method.invoke(dataContainer, dataContainer);
+            if (method.getParameters().length == 2) {
+               method.invoke(dataContainer, dataContainer, dataContainer);
+            } else if (method.getParameters().length == 1) {
+               method.invoke(dataContainer, dataContainer);
+            }
          }
-
-         ///////////////////////////////
-
-//         methodQueue.add(AnnotatedMethodAndClass.class
-//               .getDeclaredMethod("dataContainerMerge", DataContainer.class, DataContainer.class));
-//
-//         methodQueue.add(AnnotatedMethodAndClass.class
-//               .getDeclaredMethod("isEmptyDataContainer", DataContainer.class));
-//
-//         System.out.println(methodQueue.isEmpty());
 
       } catch (Exception e) {
          throw new Error(e.getMessage());
